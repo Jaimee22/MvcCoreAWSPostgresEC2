@@ -5,10 +5,11 @@ using MvcCoreAWSPostgresEC2.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 
-string connectionString = builder.Configuration.GetConnectionString("Postgres");
+string connectionString = builder.Configuration.GetConnectionString("Mariadb");
+//string connectionString = builder.Configuration.GetConnectionString("Postgres");
 builder.Services.AddTransient<RepositoryDepartamento>();
-builder.Services.AddDbContext<DepartamentosContext>(options => options.UseNpgsql(connectionString));
-
+//builder.Services.AddDbContext<DepartamentosContext>(options => options.UseNpgsql(connectionString));
+builder.Services.AddDbContext<DepartamentosContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 
 
